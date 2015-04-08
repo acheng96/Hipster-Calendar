@@ -15,23 +15,24 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     var startDate : NSDate! = NSDate()
     var endDate : NSDate! = NSDate().dateByAddingMonths(12).lastDayOfMonth()
     var dates : [NSDate]! = []
-    var daySize : CGSize = CGSizeMake(50, 50)
-    var padding : CGFloat = 0
+    var daySize : CGSize!
+    var padding : CGFloat = 15
     
     // Initializer
     
-    private func initialize() {
+    func initialize() {
         
         let cols : Int = 6
-        daySize.width = self.frame.width/CGFloat(cols)
-        daySize.height = daySize.width
-        
+        let cwidth = self.frame.width/CGFloat(cols)
+        let cheight = cwidth
+        daySize = CGSize(width: cwidth, height: cheight)
+
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
-        var collectionView : UICollectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
+        var collectionView : UICollectionView = UICollectionView(frame: self.frame, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.clearColor()
@@ -40,11 +41,6 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
         
         collectionView.registerClass(HipCalendarCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "Header")
         collectionView.registerClass(HipCalendarDayCollectionViewCell.self, forCellWithReuseIdentifier: "DayCell")
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.initialize()
     }
     
     // Helper Methods
@@ -132,8 +128,7 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        //return CGSizeMake(self.frame.width, 50)
-        return CGSizeMake(self.frame.width, 30)
+        return CGSizeMake(collectionView.frame.width - padding * 2, 30)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
