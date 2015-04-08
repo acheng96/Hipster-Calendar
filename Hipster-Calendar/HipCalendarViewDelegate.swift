@@ -10,10 +10,7 @@ import Foundation
 
 protocol HipCalendarViewDelegate {
     
-    // Reports the selected date.
-    func calendarView(calendarView: HipCalendarView, didSelectDate date: NSDate)
-    
-    // Reports the unselected date.
+    func calendarView(calendarView: HipCalendarView, didSelectDate date: NSDate) 
     func calendarView(calendarView: HipCalendarView, didDeselectDate date: NSDate)
     
 }

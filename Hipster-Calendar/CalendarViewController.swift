@@ -9,11 +9,13 @@
 import UIKit
 
 class CalendarViewController: UIViewController {
+    
+    @IBOutlet weak var calendarView: HipCalendarView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        calendarView.center = self.view.center
     }
-
 
 }
 

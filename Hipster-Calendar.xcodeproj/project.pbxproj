@@ -15,6 +15,9 @@
 		D140C2591AC37F3800DFD137 /* Hipster_CalendarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140C2581AC37F3800DFD137 /* Hipster_CalendarTests.swift */; };
 		D140C2631AC3804100DFD137 /* HipCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140C2621AC3804100DFD137 /* HipCalendarView.swift */; };
 		D140C2651AC380D800DFD137 /* HipCalendarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140C2641AC380D800DFD137 /* HipCalendarViewDelegate.swift */; };
+		D140C2671AC3856700DFD137 /* HipCalendarDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140C2661AC3856700DFD137 /* HipCalendarDayCollectionViewCell.swift */; };
+		D140C2691AC3876800DFD137 /* NSDate Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140C2681AC3876800DFD137 /* NSDate Extension.swift */; };
+		D140C26B1AC39DBB00DFD137 /* HipCalendarCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140C26A1AC39DBB00DFD137 /* HipCalendarCollectionReusableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,9 @@
 		D140C2581AC37F3800DFD137 /* Hipster_CalendarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hipster_CalendarTests.swift; sourceTree = "<group>"; };
 		D140C2621AC3804100DFD137 /* HipCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HipCalendarView.swift; sourceTree = "<group>"; };
 		D140C2641AC380D800DFD137 /* HipCalendarViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HipCalendarViewDelegate.swift; sourceTree = "<group>"; };
+		D140C2661AC3856700DFD137 /* HipCalendarDayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HipCalendarDayCollectionViewCell.swift; sourceTree = "<group>"; };
+		D140C2681AC3876800DFD137 /* NSDate Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate Extension.swift"; sourceTree = "<group>"; };
+		D140C26A1AC39DBB00DFD137 /* HipCalendarCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HipCalendarCollectionReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,10 +88,13 @@
 			isa = PBXGroup;
 			children = (
 				D140C2421AC37F3700DFD137 /* AppDelegate.swift */,
-				D140C2441AC37F3700DFD137 /* CalendarViewController.swift */,
-				D140C2621AC3804100DFD137 /* HipCalendarView.swift */,
 				D140C2641AC380D800DFD137 /* HipCalendarViewDelegate.swift */,
+				D140C2441AC37F3700DFD137 /* CalendarViewController.swift */,
 				D140C2461AC37F3700DFD137 /* Main.storyboard */,
+				D140C2621AC3804100DFD137 /* HipCalendarView.swift */,
+				D140C2661AC3856700DFD137 /* HipCalendarDayCollectionViewCell.swift */,
+				D140C26A1AC39DBB00DFD137 /* HipCalendarCollectionReusableView.swift */,
+				D140C2681AC3876800DFD137 /* NSDate Extension.swift */,
 				D140C2491AC37F3700DFD137 /* Images.xcassets */,
 				D140C24B1AC37F3700DFD137 /* LaunchScreen.xib */,
 				D140C2401AC37F3700DFD137 /* Supporting Files */,
@@ -219,7 +228,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D140C2631AC3804100DFD137 /* HipCalendarView.swift in Sources */,
+				D140C26B1AC39DBB00DFD137 /* HipCalendarCollectionReusableView.swift in Sources */,
+				D140C2691AC3876800DFD137 /* NSDate Extension.swift in Sources */,
 				D140C2651AC380D800DFD137 /* HipCalendarViewDelegate.swift in Sources */,
+				D140C2671AC3856700DFD137 /* HipCalendarDayCollectionViewCell.swift in Sources */,
 				D140C2451AC37F3700DFD137 /* CalendarViewController.swift in Sources */,
 				D140C2431AC37F3700DFD137 /* AppDelegate.swift in Sources */,
 			);

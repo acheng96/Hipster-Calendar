@@ -8,7 +8,136 @@
 
 import UIKit
 
-class HipCalendarView: UIView {
+class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    var delegate : HipCalendarViewDelegate?
+    var calendar : NSCalendar! = NSCalendar(calendarIdentifier: NSGregorianCalendar)
+    var startDate : NSDate! = NSDate()
+    var endDate : NSDate! = NSDate().dateByAddingMonths(12).lastDayOfMonth()
+    var dates : [NSDate]! = []
+    var daySize : CGSize = CGSizeMake(50, 50)
+    var padding : CGFloat = 0
+    
+    // Initializer
+    
+    private func initialize() {
+        
+        let cols : Int = 6
+        daySize.width = self.frame.width/CGFloat(cols)
+        daySize.height = daySize.width
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        
+        var collectionView : UICollectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.allowsMultipleSelection = true
+        self.addSubview(collectionView)
+        
+        collectionView.registerClass(HipCalendarCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "Header")
+        collectionView.registerClass(HipCalendarDayCollectionViewCell.self, forCellWithReuseIdentifier: "DayCell")
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.initialize()
+    }
+    
+    // Helper Methods
+    
+    private func dateForIndexPath(indexPath: NSIndexPath ) -> NSDate {
+        var date : NSDate! = startDate?.dateByAddingMonths(indexPath.section)
+        let components : NSDateComponents = date.components()
+        components.day = indexPath.item + 1
+        date = NSDate.dateFromComponents(components)
 
+        return date;
+    }
+    
+    // MARK: UICollectionViewDataSource
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        var numberOfMonths : Int? = startDate?.numberOfMonthsUntilEndDate(self.endDate!)
+        return numberOfMonths == nil ? 0 : numberOfMonths!
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let firstDayOfMonth : NSDate? = startDate?.firstDayOfMonth().dateByAddingMonths(section)
+        let lastDayOfMonth : NSDate? = firstDayOfMonth?.lastDayOfMonth()
+        var numberOfDays : Int? = firstDayOfMonth?.numDaysInMonth()
+        numberOfDays == nil ? 0 : numberOfDays!
 
+        return numberOfDays!
+    }
+    
+    // Cell
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let firstDayOfMonth : NSDate? = startDate?.firstDayOfMonth().dateByAddingMonths(indexPath.section)
+        let date: NSDate = dateForIndexPath(indexPath)
+        var cell : HipCalendarDayCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("DayCell", forIndexPath: indexPath) as HipCalendarDayCollectionViewCell
+        cell.date = date
+        
+        return cell
+    }
+    
+    // Section
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    
+        if (kind == UICollectionElementKindSectionHeader) {
+            let firstDayOfMonth: NSDate = dateForIndexPath(indexPath).firstDayOfMonth()
+            var header = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath) as HipCalendarCollectionReusableView
+            header.firstDayOfMonth = firstDayOfMonth
+            
+            return header
+        }
+        
+        return UICollectionReusableView()
+    }
+    
+    // MARK: UICollectionViewDelegate
+    
+    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let date: NSDate = dateForIndexPath(indexPath)
+        dates.append(date)
+        
+        if (delegate != nil) {
+            delegate?.calendarView(self, didSelectDate: date)
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        let date: NSDate = dateForIndexPath(indexPath)
+        let index: Int? = find(dates, date) as Int?
+        if (index != nil) {
+            dates.removeAtIndex(index!)
+        }
+        
+        if (delegate != nil) {
+            delegate?.calendarView(self, didDeselectDate: date)
+        }
+    }
+    
+    // MARK: UICollectionViewDelegateFlowLayout
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        //return CGSizeMake(self.frame.width, 50)
+        return CGSizeMake(self.frame.width, 30)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return daySize
+    }
+    
 }
