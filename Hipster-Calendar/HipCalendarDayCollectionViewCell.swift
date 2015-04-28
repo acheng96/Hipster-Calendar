@@ -34,7 +34,7 @@ class HipCalendarDayCollectionViewCell: UICollectionViewCell {
             } else {
                 dayLabel.font = UIFont(name: "HelveticaNeue-Light", size: 12.0)
                 dayCircleView.backgroundColor = circleColor
-                if (date.month() != NSDate().month()) {
+                if (date.month() != NSDate().month() || date.year() != NSDate().year()) {
                     dayLabel.textColor = UIColor.grayColor()
                 } else {
                     dayLabel.textColor = unselectedTextColor
@@ -48,7 +48,7 @@ class HipCalendarDayCollectionViewCell: UICollectionViewCell {
             dayInnerCircleView.backgroundColor = selected ? selectedColor : unselectedColor
             
             if (!isToday()) {
-                if (date.month() == NSDate().month()) {
+                if (date.month() == NSDate().month() && date.year() == NSDate().year()) {
                     dayLabel.textColor = selected ? unselectedColor : unselectedTextColor
                 } else {
                     dayLabel.textColor = selected ? unselectedColor : UIColor.grayColor()

@@ -10,7 +10,7 @@ import UIKit
 
 class HipCalendarCollectionReusableView: UICollectionReusableView {
     
-    var dateFormat: String! = "MMMM YYYY"
+    var dateFormat: String! = "MMM YYYY"
     var titleLabel: UILabel!
     var firstDayOfMonth: NSDate! {
         didSet {
