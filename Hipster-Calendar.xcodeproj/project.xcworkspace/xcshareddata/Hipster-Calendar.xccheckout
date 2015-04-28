@@ -10,6 +10,8 @@
 	<string>Hipster-Calendar</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>8ECADFFE85195ED5CD03ADC4D945FB9227ED4424</key>
+		<string>https://github.com/acheng96/Hipster-Calendar.git</string>
 		<key>F8DC1AC518D40EA1EC1DAE98B7CC6B9DA1424C8D</key>
 		<string>https://github.com/acheng96/Hipster-Calendar.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>Hipster-Calendar.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>8ECADFFE85195ED5CD03ADC4D945FB9227ED4424</key>
+		<string>../..%20/Hipster-Calendar</string>
 		<key>F8DC1AC518D40EA1EC1DAE98B7CC6B9DA1424C8D</key>
 		<string>../..</string>
 	</dict>
@@ -33,6 +37,14 @@
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>F8DC1AC518D40EA1EC1DAE98B7CC6B9DA1424C8D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Hipster-Calendar</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8ECADFFE85195ED5CD03ADC4D945FB9227ED4424</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Hipster-Calendar</string>
 		</dict>

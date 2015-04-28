@@ -17,7 +17,7 @@ extension NSDate {
     
     private func HipCalendarDateComponents(date: NSDate) -> NSDateComponents {
         let calendar : NSCalendar = NSCalendar.currentCalendar()
-        return calendar.components(NSCalendarUnit.YearCalendarUnit|NSCalendarUnit.CalendarUnitMonth|NSCalendarUnit.WeekCalendarUnit|NSCalendarUnit.WeekdayCalendarUnit|NSCalendarUnit.DayCalendarUnit, fromDate:self)
+        return calendar.components(NSCalendarUnit.CalendarUnitYear|NSCalendarUnit.CalendarUnitMonth|NSCalendarUnit.CalendarUnitWeekOfYear|NSCalendarUnit.CalendarUnitDay, fromDate:self)
     }
     
     func components() -> NSDateComponents {
@@ -56,7 +56,7 @@ extension NSDate {
         let calendar : NSCalendar = NSCalendar.currentCalendar()
         let firstDay : NSDate = self.firstDayOfMonth()
         let lastDay : NSDate = self.lastDayOfMonth()
-        let components : NSDateComponents = calendar.components(NSCalendarUnit.DayCalendarUnit, fromDate: firstDay, toDate: lastDay, options: NSCalendarOptions(0))
+        let components : NSDateComponents = calendar.components(NSCalendarUnit.CalendarUnitDay, fromDate: firstDay, toDate: lastDay, options: NSCalendarOptions(0))
         return components.day + 1
     }
     

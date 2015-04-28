@@ -10,11 +10,12 @@ import UIKit
 
 class CalendarViewController: UIViewController {
     
-    @IBOutlet weak var calendarView: HipCalendarView!
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        calendarView.center = self.view.center
+        var collectionView: HipCalendarView = HipCalendarView()
+        collectionView.frame = view.frame
+        collectionView.initialize()
+        view.addSubview(collectionView)
     }
 
 }
