@@ -12,8 +12,10 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     
     var delegate : HipCalendarViewDelegate?
     var calendar : NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-    var startDate : NSDate! = NSDate()
-    var endDate : NSDate! = NSDate().dateByAddingMonths(12).lastDayOfMonth()
+
+    
+    var startDate : NSDate! = NSDate(dateString:"2015-03-05")
+    var currentDate : NSDate! = NSDate()
     var dates : [NSDate]! = []
     var daySize : CGSize!
     var padding : CGFloat = 15
@@ -44,36 +46,29 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     
     // Helper Methods
     
-    private func dateForIndexPath(indexPath: NSIndexPath ) -> NSDate {
-        var date : NSDate! = startDate?.dateByAddingMonths(indexPath.section)
+    private func dateForIndexPath(indexPath: NSIndexPath) -> NSDate {
+        var date : NSDate! = startDate?.dateByAddingMonths(indexPath.section).lastDayOfMonth()
         let components : NSDateComponents = date.components()
-        components.day = indexPath.item + 1
+        components.day = date.numDaysInMonth() - indexPath.item
         date = NSDate.dateFromComponents(components)
 
         return date;
     }
     
-    func isCurrentMonth(date: NSDate) -> Bool {
-        return (date.month() == NSDate().month() && date.day() == NSDate().day())
-    }
-    
     // MARK: UICollectionViewDataSource
     
+    // Number of months so far
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        var numberOfMonths : Int? = startDate?.numberOfMonthsUntilEndDate(self.endDate!)
+        var numberOfMonths : Int? = startDate?.numberOfMonths(self.currentDate!)
         return numberOfMonths == nil ? 0 : numberOfMonths!
     }
     
+    // Number of days in each month
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let firstDayOfMonth : NSDate? = startDate?.firstDayOfMonth().dateByAddingMonths(section)
         let lastDayOfMonth : NSDate? = firstDayOfMonth?.lastDayOfMonth()
         var numberOfDays : Int? = firstDayOfMonth?.numDaysInMonth()
-        
         numberOfDays == nil ? 0 : numberOfDays!
-        
-        if (isCurrentMonth(firstDayOfMonth!)) {
-            numberOfDays = NSDate().day()
-        }
 
         return numberOfDays!
     }
@@ -85,6 +80,7 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
         let date: NSDate = dateForIndexPath(indexPath)
         var cell : HipCalendarDayCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("DayCell", forIndexPath: indexPath) as! HipCalendarDayCollectionViewCell
         cell.date = date
+        dates.append(cell.date)
         
         return cell
     }
@@ -97,7 +93,7 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
             let firstDayOfMonth: NSDate = dateForIndexPath(indexPath).firstDayOfMonth()
             var header = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath) as! HipCalendarCollectionReusableView
             header.firstDayOfMonth = firstDayOfMonth
-            
+
             return header
         }
         
@@ -106,17 +102,17 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     
     // MARK: UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-    func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
+//    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+//        return true
+//    }
+//    
+//    func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+//        return true
+//    }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let date: NSDate = dateForIndexPath(indexPath)
-        dates.append(date)
+        //dates.append(date)
         
         if (delegate != nil) {
             delegate?.calendarView(self, didSelectDate: date)
@@ -125,10 +121,10 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         let date: NSDate = dateForIndexPath(indexPath)
-        let index: Int? = find(dates, date) as Int?
-        if (index != nil) {
-            dates.removeAtIndex(index!)
-        }
+//        let index: Int? = find(dates, date) as Int?
+//        if (index != nil) {
+//            dates.removeAtIndex(index!)
+//        }
         
         if (delegate != nil) {
             delegate?.calendarView(self, didDeselectDate: date)
