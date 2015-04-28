@@ -12,9 +12,7 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     
     var delegate : HipCalendarViewDelegate?
     var calendar : NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-
-    
-    var startDate : NSDate! = NSDate(dateString:"2015-03-05")
+    var startDate : NSDate! = NSDate(dateString:"2014-04-01")
     var currentDate : NSDate! = NSDate()
     var dates : [NSDate]! = []
     var daySize : CGSize!
@@ -47,25 +45,24 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     // Helper Methods
     
     private func dateForIndexPath(indexPath: NSIndexPath) -> NSDate {
-        var date : NSDate! = startDate?.dateByAddingMonths(indexPath.section).lastDayOfMonth()
+        var date : NSDate! = currentDate?.dateByAddingMonths(-indexPath.section).lastDayOfMonth()
         let components : NSDateComponents = date.components()
         components.day = date.numDaysInMonth() - indexPath.item
         date = NSDate.dateFromComponents(components)
+        dates.append(date)
 
         return date;
     }
     
     // MARK: UICollectionViewDataSource
     
-    // Number of months so far
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         var numberOfMonths : Int? = startDate?.numberOfMonths(self.currentDate!)
         return numberOfMonths == nil ? 0 : numberOfMonths!
     }
     
-    // Number of days in each month
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let firstDayOfMonth : NSDate? = startDate?.firstDayOfMonth().dateByAddingMonths(section)
+        let firstDayOfMonth : NSDate? = currentDate?.firstDayOfMonth().dateByAddingMonths(section)
         let lastDayOfMonth : NSDate? = firstDayOfMonth?.lastDayOfMonth()
         var numberOfDays : Int? = firstDayOfMonth?.numDaysInMonth()
         numberOfDays == nil ? 0 : numberOfDays!
@@ -76,11 +73,9 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     // Cell
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        //let firstDayOfMonth : NSDate? = startDate?.firstDayOfMonth().dateByAddingMonths(indexPath.section)
         let date: NSDate = dateForIndexPath(indexPath)
         var cell : HipCalendarDayCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("DayCell", forIndexPath: indexPath) as! HipCalendarDayCollectionViewCell
         cell.date = date
-        dates.append(cell.date)
         
         return cell
     }
@@ -102,17 +97,13 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     
     // MARK: UICollectionViewDelegate
     
-//    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-//        return true
-//    }
-//    
-//    func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-//        return true
-//    }
-    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let date: NSDate = dateForIndexPath(indexPath)
-        //dates.append(date)
+        println(date)
+        let index: Int? = find(dates, date) as Int?
+        if (index != nil) {
+              // TODO: Push to tableViewCell associated with that date
+        }
         
         if (delegate != nil) {
             delegate?.calendarView(self, didSelectDate: date)
@@ -121,10 +112,6 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         let date: NSDate = dateForIndexPath(indexPath)
-//        let index: Int? = find(dates, date) as Int?
-//        if (index != nil) {
-//            dates.removeAtIndex(index!)
-//        }
         
         if (delegate != nil) {
             delegate?.calendarView(self, didDeselectDate: date)

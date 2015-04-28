@@ -80,13 +80,6 @@ extension NSDate {
         return components.day + 1
     }
     
-    func numDaysUntilEndDate(endDate: NSDate) -> Int {
-        let calendar : NSCalendar = NSCalendar.currentCalendar()
-        let firstDay : NSDate = self.firstDayOfMonth()
-        let components : NSDateComponents = calendar.components(NSCalendarUnit.CalendarUnitDay, fromDate: firstDay, toDate: endDate, options: NSCalendarOptions(0))
-        return components.day + 1
-    }
-    
     func numberOfMonths(endDate: NSDate) -> Int {
         let calendar : NSCalendar = NSCalendar.currentCalendar()
         let components : NSDateComponents = calendar.components(NSCalendarUnit.CalendarUnitMonth, fromDate:self, toDate:endDate, options: NSCalendarOptions(0))
