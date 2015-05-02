@@ -20,7 +20,7 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>8ECADFFE85195ED5CD03ADC4D945FB9227ED4424</key>
-		<string>../..%20/Hipster-Calendar</string>
+		<string>../..Hipster-Calendar</string>
 		<key>F8DC1AC518D40EA1EC1DAE98B7CC6B9DA1424C8D</key>
 		<string>../..</string>
 	</dict>
@@ -38,7 +38,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>F8DC1AC518D40EA1EC1DAE98B7CC6B9DA1424C8D</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Hipster-Calendar</string>
+			<string>Hipster-Calendar%20</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
@@ -46,7 +46,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>8ECADFFE85195ED5CD03ADC4D945FB9227ED4424</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Hipster-Calendar</string>
+			<string>Hipster-Calendar%20Hipster-Calendar</string>
 		</dict>
 	</array>
 </dict>

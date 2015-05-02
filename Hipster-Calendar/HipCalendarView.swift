@@ -25,7 +25,7 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
         let cheight = cwidth
         daySize = CGSize(width: cwidth, height: cheight)
 
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        let layout: HipStickyHeaderFlowLayout = HipStickyHeaderFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: padding, bottom: 0, right: padding)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
@@ -87,6 +87,7 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
             let firstDayOfMonth: NSDate = dateForIndexPath(indexPath).firstDayOfMonth()
             var header = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath) as! HipCalendarCollectionReusableView
             header.firstDayOfMonth = firstDayOfMonth
+            header.backgroundColor = UIColor(red: 76/255, green: 173/255, blue: 133/255, alpha: 1)
 
             return header
         }
@@ -99,10 +100,6 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let date: NSDate = dateForIndexPath(indexPath)
         println(date)
-        let index: Int? = find(dates, date) as Int?
-        if (index != nil) {
-              // TODO: Push to tableViewCell associated with that date
-        }
     }
     
     // MARK: UICollectionViewDelegateFlowLayout

@@ -61,10 +61,6 @@ extension NSDate {
         return HipCalendarDate(components)
     }
     
-    func isCurrentMonth(date: NSDate) -> Bool {
-        return (date.month() == NSDate().month() && date.year() == NSDate().year())
-    }
-    
     func numDaysInMonth() -> Int {
         let calendar : NSCalendar = NSCalendar.currentCalendar()
         let firstDay : NSDate = self.firstDayOfMonth()
@@ -91,6 +87,10 @@ extension NSDate {
         let components : NSDateComponents = NSDateComponents()
         components.month = months
         return calendar.dateByAddingComponents(components, toDate: self, options: NSCalendarOptions(0))!
+    }
+    
+    func isCurrentMonth(date: NSDate) -> Bool {
+        return (date.month() == NSDate().month() && date.year() == NSDate().year())
     }
     
     func timeDescription(format: String) -> String {
