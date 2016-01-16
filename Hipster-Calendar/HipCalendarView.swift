@@ -30,7 +30,7 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
-        var collectionView : UICollectionView = UICollectionView(frame: self.frame, collectionViewLayout: layout)
+        let collectionView : UICollectionView = UICollectionView(frame: self.frame, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.clearColor()
@@ -56,14 +56,13 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     // MARK: UICollectionViewDataSource
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        var numberOfMonths : Int? = startDate?.numberOfMonths(self.currentDate!)
+        let numberOfMonths : Int? = startDate?.numberOfMonths(self.currentDate!)
         return numberOfMonths == nil ? 0 : numberOfMonths!
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let firstDayOfMonth : NSDate? = currentDate?.firstDayOfMonth().dateByAddingMonths(section)
-        let lastDayOfMonth : NSDate? = firstDayOfMonth?.lastDayOfMonth()
-        var numberOfDays : Int? = firstDayOfMonth?.numDaysInMonth()
+        let numberOfDays : Int? = firstDayOfMonth?.numDaysInMonth()
         numberOfDays == nil ? 0 : numberOfDays!
 
         return numberOfDays!
@@ -73,7 +72,7 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let date: NSDate = dateForIndexPath(indexPath)
-        var cell : HipCalendarDayCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("DayCell", forIndexPath: indexPath) as! HipCalendarDayCollectionViewCell
+        let cell : HipCalendarDayCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("DayCell", forIndexPath: indexPath) as! HipCalendarDayCollectionViewCell
         cell.date = date
         
         return cell
@@ -85,7 +84,7 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     
         if (kind == UICollectionElementKindSectionHeader) {
             let firstDayOfMonth: NSDate = dateForIndexPath(indexPath).firstDayOfMonth()
-            var header = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath) as! HipCalendarCollectionReusableView
+            let header = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath) as! HipCalendarCollectionReusableView
             header.firstDayOfMonth = firstDayOfMonth
             header.backgroundColor = UIColor(red: 76/255, green: 173/255, blue: 133/255, alpha: 1)
 
@@ -99,7 +98,7 @@ class HipCalendarView: UIView, UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let date: NSDate = dateForIndexPath(indexPath)
-        println(date)
+        print(date)
     }
     
     // MARK: UICollectionViewDelegateFlowLayout

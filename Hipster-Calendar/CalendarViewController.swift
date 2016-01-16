@@ -12,7 +12,7 @@ class CalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var collectionView: HipCalendarView = HipCalendarView()
+        let collectionView: HipCalendarView = HipCalendarView()
         collectionView.frame = view.frame
         collectionView.initialize()
         view.addSubview(collectionView)

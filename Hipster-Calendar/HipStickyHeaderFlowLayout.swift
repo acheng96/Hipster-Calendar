@@ -10,27 +10,22 @@ import UIKit
 
 class HipStickyHeaderFlowLayout: UICollectionViewFlowLayout {
     
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [AnyObject]? {
+    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
-        var answer: [UICollectionViewLayoutAttributes] = super.layoutAttributesForElementsInRect(rect)! as! [UICollectionViewLayoutAttributes]
+        var answer: [UICollectionViewLayoutAttributes] = super.layoutAttributesForElementsInRect(rect)! 
         let contentOffset = collectionView!.contentOffset
-        
-        var missingSections = NSMutableIndexSet()
+        let missingSections = NSMutableIndexSet()
         
         for layoutAttributes in answer {
             if (layoutAttributes.representedElementCategory == .Cell) {
-                if let indexPath = layoutAttributes.indexPath {
-                    missingSections.addIndex(layoutAttributes.indexPath.section)
-                }
+                missingSections.addIndex(layoutAttributes.indexPath.section)
             }
         }
         
         for layoutAttributes in answer {
             if let representedElementKind = layoutAttributes.representedElementKind {
                 if representedElementKind == UICollectionElementKindSectionHeader {
-                    if let indexPath = layoutAttributes.indexPath {
-                        missingSections.removeIndex(indexPath.section)
-                    }
+                    missingSections.removeIndex(layoutAttributes.indexPath.section)
                 }
             }
         }
@@ -45,22 +40,21 @@ class HipStickyHeaderFlowLayout: UICollectionViewFlowLayout {
         for layoutAttributes in answer {
             if let representedElementKind = layoutAttributes.representedElementKind {
                 if representedElementKind == UICollectionElementKindSectionHeader {
-                    let section = layoutAttributes.indexPath!.section
+                    let section = layoutAttributes.indexPath.section
                     let numberOfItemsInSection = collectionView!.numberOfItemsInSection(section)
                     
-                    let firstCellIndexPath = NSIndexPath(forItem: 0, inSection: section)!
-                    let lastCellIndexPath = NSIndexPath(forItem: max(0, (numberOfItemsInSection - 1)), inSection: section)!
+                    let firstCellIndexPath = NSIndexPath(forItem: 0, inSection: section)
+                    let lastCellIndexPath = NSIndexPath(forItem: max(0, (numberOfItemsInSection - 1)), inSection: section)
                     
-                    
-                    let (firstCellAttributes: UICollectionViewLayoutAttributes, lastCellAttributes: UICollectionViewLayoutAttributes) = {
+                    let (firstCellAttributes, lastCellAttributes): (UICollectionViewLayoutAttributes, UICollectionViewLayoutAttributes) = {
                         if (self.collectionView!.numberOfItemsInSection(section) > 0) {
                             return (
-                                self.layoutAttributesForItemAtIndexPath(firstCellIndexPath),
-                                self.layoutAttributesForItemAtIndexPath(lastCellIndexPath))
+                                self.layoutAttributesForItemAtIndexPath(firstCellIndexPath)!,
+                                self.layoutAttributesForItemAtIndexPath(lastCellIndexPath)!)
                         } else {
                             return (
-                                self.layoutAttributesForSupplementaryViewOfKind(UICollectionElementKindSectionHeader, atIndexPath: firstCellIndexPath),
-                                self.layoutAttributesForSupplementaryViewOfKind(UICollectionElementKindSectionFooter, atIndexPath: lastCellIndexPath))
+                                self.layoutAttributesForSupplementaryViewOfKind(UICollectionElementKindSectionHeader, atIndexPath: firstCellIndexPath)!,
+                                self.layoutAttributesForSupplementaryViewOfKind(UICollectionElementKindSectionFooter, atIndexPath: lastCellIndexPath)!)
                         }
                         }()
                     

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F8DC1AC518D40EA1EC1DAE98B7CC6B9DA1424C8D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8ECADFFE85195ED5CD03ADC4D945FB9227ED4424" : 0,
+    "F8DC1AC518D40EA1EC1DAE98B7CC6B9DA1424C8D" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C2269553-BE90-4010-AD8A-E5F34F98276E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8ECADFFE85195ED5CD03ADC4D945FB9227ED4424" : "Hipster-Calendar%20Hipster-Calendar",
+    "F8DC1AC518D40EA1EC1DAE98B7CC6B9DA1424C8D" : "Hipster-Calendar%20"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Hipster-Calendar",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Hipster-Calendar.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/acheng96\/Hipster-Calendar.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8ECADFFE85195ED5CD03ADC4D945FB9227ED4424"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/acheng96\/Hipster-Calendar.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F8DC1AC518D40EA1EC1DAE98B7CC6B9DA1424C8D"
+    }
+  ]
+}
